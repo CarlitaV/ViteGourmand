@@ -11,7 +11,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN a2enmod rewrite \
     && echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
+# Définir le bon DocumentRoot (public/)
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+
+RUN sed -ri 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
+    /etc/apache2/sites-available/*.conf \
+    /etc/apache2/apache2.conf
+
+# Droits Apache (sécurisé)
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
+
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
+
