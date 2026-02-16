@@ -1,0 +1,4 @@
+<?php
+
+
+<h1>Inscription réussie </h1>
