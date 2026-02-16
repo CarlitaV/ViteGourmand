@@ -1,13 +1,12 @@
 CREATE DATABASE IF NOT EXISTS ViteGourmand;
 USE ViteGourmand;
 
---Table des Roles Admin, Employé et Client--
+/*Table des Roles Admin, Employé et Client */
 CREATE TABLE Role(
     idRole INT AUTO_INCREMENT PRIMARY KEY, 
     libelle ENUM('user','admin', 'employe') NOT NULL DEFAULT 'user'
     );
 
---Table utilisateur--
 CREATE TABLE Utilisateur(
     idUser INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
@@ -46,11 +45,12 @@ CREATE TABLE LigneCommande(
     idCommande INT NOT NULL,
     idMenu INT NOT NULL,
     quantite INT NOT NULL,
-    prixUnitaire DECIMAL(10.2),
+    prixUnitaire DECIMAL(10,2),
     Foreign Key (idCommande) REFERENCES Commande(idCommande),
     Foreign Key (idMenu) REFERENCES Menu(idMenu)
 
 );
+
 CREATE TABLE Plat(
     idPlat INT AUTO_INCREMENT PRIMARY KEY,
     titre VARCHAR(150) NOT NULL,
@@ -59,13 +59,14 @@ CREATE TABLE Plat(
     photo VARCHAR(255),
     stockDisponible INT DEFAULT 0
 );
+
 CREATE Table Allergene(
-    idAllergene INT AUTO_INCERMNET PRIMARY KEY,
+    idAllergene INT AUTO_INCREMENT PRIMARY KEY,
     libelle VARCHAR(100) NOT NULL
     
 );
 
-CREATE Table Plat_Allergene(
+CREATE TABLE Plat_Allergene(
     idPlat INT NOT NULL,
     idAllergene INT NOT NULL,
     PRIMARY KEY (idPlat, idAllergene),
@@ -73,7 +74,7 @@ CREATE Table Plat_Allergene(
     FOREIGN KEY (idAllergene) REFERENCES Allergene(idAllergene)
 );
 
-CREATE Table Avis(
+CREATE TABLE Avis(
     idAvis INT AUTO_INCREMENT PRIMARY KEY,
     note INT CHECK (note BETWEEN 1 AND 5),
     commentaire VARCHAR(500),
