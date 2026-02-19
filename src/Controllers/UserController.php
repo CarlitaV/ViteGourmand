@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use App\services\UserService;
+use App\Services\UserService;
 
-class userController{
+class UserController{
     private $userService;
 
     public function __construct()
@@ -26,13 +26,38 @@ class userController{
         //Gere les vue sucess et error
         if($result['success']){
             //on affiche la vue success
-            require './src/views/success.php';
+            require __DIR__ . '/../Views/202Register.php';
             
         }else{
             //Affiche la vue message erreur
             $error = $result['message'];
-            require './src/views/error.php';
+            require __DIR__ . '/../Views/404Register.php';  
         }
+    }
+
+    //------------------CONNEXION
+    public function login(){
+        $utilisateur = $_POST['utilisateur'] ?? null;
+        $email = $_POST['email'] ?? null;
+        $motDePasse = $_POST['motDePasse'] ?? null;
+
+        $result = $this->userService->login($email,$motDePasse, $utilisateur);
+
+        if ($result['success']){
+            header('Location: /accueil');
+            exit();
+        }else{
+            $error = $result['message'];
+            require __DIR__ . '/../Views/404Register.php';  
+        }
+    }
+
+    //-------------------DECONNEXION
+    public function logout(){
+        $this->userService->logout();
+
+        header('Location: /connexion');
+
     }
 
 }

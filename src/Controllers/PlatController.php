@@ -15,6 +15,6 @@ class PlatController{
         $keyword = $_GET['keyword']; //keyword met cles dans la barre de recherche
         $plats = $this->platService->searchPlat($keyword);
 
-        require './src/views/'; //------------------------------------------------A CREER platList.php
+        require __DIR__ . '/../Views/PlatListe.php'; 
     }
 }

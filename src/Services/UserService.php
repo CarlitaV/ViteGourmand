@@ -63,7 +63,7 @@ class UserService{
             ];
         }
 
-        $user = $this->userRepository->getUserByEmail($email);
+        $utilisateur = $this->userRepository->getUserByEmail($email);
 
         if (!$utilisateur){
             return[
@@ -74,7 +74,7 @@ class UserService{
         if (!password_verify($motDePasse, $utilisateur['motDePasse'])){
             return[
                 'success' => false,
-                'message' => 'Mo de passe incorrect'
+                'message' => 'Mot de passe incorrect'
             ];
         }
 
@@ -87,9 +87,17 @@ class UserService{
         ];
     }
 
-}
+
 
     // ----- -----------------------DECONNEXION------------------------------
 
 
-    //A FAIRE
+    public function logout(){
+        //session_start();
+        session_unset();
+        session_destroy();
+
+        return['success' => true];
+    }
+
+}

@@ -18,7 +18,7 @@ services:
 
   db:
     image: mysql:8.0
-    container_name: docker compose exec app bash
+    container_name: ViteGourmand-db
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root

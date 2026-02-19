@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Services\OrderService;
 
-class orderController{
+class OrderController{
     private $orderService;
 
     public function __construct()
@@ -31,10 +31,10 @@ class orderController{
         //Affichage dse vues
         if ($result['success']){
             $numero = $result['numero_suivi'];
-            require './src/views/'; //------------------------------------------------------A FAIRE CREER LA VUE
+            require __DIR__ . '/../Views/OrderSucces.php';
         }else{
             $error = $result['message'];
-            require './src/views'; //------------------------------------------------------- IDEM
+            require __DIR__ . '/../Views/OrderError.php';
         }
     }
 }

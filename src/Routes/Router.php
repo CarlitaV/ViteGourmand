@@ -6,11 +6,11 @@ class Router{
     private array $routes = [];
 
     public function get($uri, $action){
-        $this->routes['GET']['$uri'] = $action;
+        $this->routes['GET'][$uri] = $action;
     }
 
     public function post ($uri, $action){
-        $this->routes['POST']['$uri'] = $action;
+        $this->routes['POST'][$uri] = $action;
     }
 
     public function dispatch(){
@@ -23,7 +23,8 @@ class Router{
             $controller = new $controllerClass();
             $controller->$methodName();
         }else{
-            echo "404 - Page non trouvée";
+            header("HTTP/1.0 404 Not Found");
+            require __DIR__ . '/../Views/404NotFound.php';        
         }
     }
         

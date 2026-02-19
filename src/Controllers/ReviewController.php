@@ -1,11 +1,11 @@
 <?php
 namespace App\Controllers;
-use App\services\ReviewService;
+use App\Services\ReviewService;
 
 class ReviewController{
     private $reviewService;
 
-    private function __construct()
+    public function __construct()
     {
         $this->reviewService = new ReviewService();
     }
@@ -21,10 +21,10 @@ class ReviewController{
 
         //Affichage de la vue
         if($result['success']){
-            require './src/views/'; //-----------------------------------------------------creer fichier 
+            require __DIR__ . '/../Views/202Review.php';  
         } else{
             $error = $result['message'];
-            require './src/views'; //-----------------------------------------------------A CREER 
+            require __DIR__ . '/../Views/404Review.php';
         }
     }
 }
