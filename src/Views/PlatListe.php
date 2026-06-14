@@ -22,6 +22,5 @@
 
     <a href="/accueil">Retour</a>
 
-    
 </body>
 </html>

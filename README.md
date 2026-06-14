@@ -32,7 +32,7 @@ Admin :
  - lancer Docker 
    *docker-compose up -d
  - Accéder au site et à phpMyAdmin
-   *Http://localhost:8080
+   *Http://localhost:8082
 
 # Arborésance de mon projet
 public/

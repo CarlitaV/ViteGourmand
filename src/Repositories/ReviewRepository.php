@@ -2,21 +2,25 @@
 namespace App\Repositories;
 
 use App\Config\Database;
+use PDO;
 
 class ReviewRepository{
-    private $pdo;
+    private PDO $pdo;
 
     public function __construct()
     {
         $this->pdo = Database::getInstance();
     }
 
-    public function insertReview($idUser, $idPlat, $commentaire){
+    public function insertReview(
+        int $idUser, 
+        string $commentaire):void{
+
         $stmt = $this->pdo->prepare(
-            "INSERT INTO avis (user_id, plat_id, comment) VALUES (?, ?, ?)"
+            "INSERT INTO avis (idUser, statut, commentaire) VALUES (?, ?, ?)"
         );
 
 
-    $stmt->execute([$idUser, $idPlat, $commentaire]);
+    $stmt->execute([$idUser, 'en_attente', $commentaire]);
     }  
 }

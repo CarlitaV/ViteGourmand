@@ -5,14 +5,14 @@ namespace App\Services;
 use App\Repositories\ReviewRepository;
 
 class ReviewService{
-    private $reviewRepository;
+    private ReviewRepository $reviewRepository;
 
-    private function __construct()
+    public function __construct()
     {
         $this->reviewRepository = new ReviewRepository();
     }
 
-    public function addReview($idUser, $idPlat, $commentaire){
+    public function addReview(int $idUser, int $idPlat, string $commentaire){
         //Dabord je verifie l'authentification
         if (empty($idUser)){
             return[
@@ -29,16 +29,8 @@ class ReviewService{
             ];
         }
 
-        //Verifier q'un plat est bien selection
-        if(empty($idPlat)){
-            return[
-                'success' => false,
-                'message' => 'Plat non séléctionné'
-            ];
-        }
-
         // je peut enfin insere l'avis
-        $this->reviewRepository->insertReview($idUser, $idPlat, $commentaire);
+        $this->reviewRepository->insertReview($idUser, $commentaire);
         return ['success' => true];
     }
 }

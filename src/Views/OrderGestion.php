@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/asset/CSS/Styles.css">
     <title>Gestion des Commande</title>
 </head>
 <body>
+    <?php require __DIR__ . '/includes/header.php'; ?> 
+
     <h1>Gestion des Commandes (Admin) </h1>
 
-    <table>
+    <table class="adminTable">
         <thead>
             <tr>
                 <th>ID</th>
@@ -29,7 +32,7 @@
                         <?php if ($commande['statut'] !== 'validée'): ?>
                             <form method="POST" action="/admin/valider">
                                 <input type="hidden" name="id" value="<?=  $commande['idCommande']; ?>">
-                                <button type="submit"> Valider</button>
+                                <button class="btnValider" type="submit"> Valider</button>
                             </form>
                         <?php endif; ?>
                     </td>
@@ -38,5 +41,6 @@
         </tbody>
     </table>
     
+    <?php require __DIR__ . '/includes/header.php'; ?> 
 </body>
 </html>

@@ -4,10 +4,12 @@ namespace App\Services;
 
 use App\Repositories\OrderRepository;
 use App\Repositories\PlatRepository;
+use App\Repositories\StatRepository;
 
 class OrderService{
-    private $orderRepository;
-    private $platRepository;
+    private OrderRepository $orderRepository;
+    private PlatRepository $platRepository;
+    private StatRepository $sta
 
     public function __construct()
     {
@@ -15,7 +17,12 @@ class OrderService{
         $this->platRepository = new PlatRepository();
     }
 
-    public function createOrder($idUser, $idPlat, $nbPersonnes, $adresse, $modePaiement){
+    public function createOrder(
+        int $idUser, 
+        int $idPlat, 
+        int $nbPersonnes, 
+        string $adresse, 
+        string $modePaiement):array{
 
         //Verification de l'authentification
         if (!$this->isAuthenticated($idUser)){
@@ -38,20 +45,25 @@ class OrderService{
         //Recuperation du prix
         $prix = $this->platRepository->getPrice($idPlat);
 
-        //Calcul des totaux
-        $total = $prix * $nbPersonnes;
+        //Calcul HT
+        $totalHt = $prix * $nbPersonnes;
 
         //Reduction si > 5 personnes alors -10%
         if ($nbPersonnes > 5 ){
-            $total *=0.9; 
+            $totalHt *=0.9; 
         }
 
         //Calcul des frais de livraison
         $frais = $this->calculateShipping($adresse);
-        $total += $frais;
+
+        //TVA 20%
+        $tva = $totalHt * .20;
+
+        //TTC
+        $totalTtc = $totalHt + $tva + $frais ;
 
         //Verification de paiement
-        if (!$this->validatePayement($modePaiement, $total)){
+        if (!$this->validatePayement($modePaiement, $totalTtc)){
             return [
                 'success' => false,
                 'message' => 'Paiement refusé ou solde insuffisant'
@@ -63,12 +75,17 @@ class OrderService{
 
         //Inserer commande
         $this->orderRepository->insertOrder(
+            $adresse,
             $idUser,
-            $idPlat,
             $nbPersonnes,
-            $total,
+            'en_attente',
+            $totalHt,
+            $totalTtc,
             $numeroSuivi
         );
+
+        //Statistiques
+        $this->statRepository->incrementCommande();
 
         //MAJ des stock 
         $this->platRepository->decrementStock($idPlat);
@@ -79,18 +96,18 @@ class OrderService{
         ];
     }
 
-    private function isAuthenticated($idUser){
+    private function isAuthenticated(int $idUser): bool{
         return !empty($idUser);
     }
 
-    private function calculateShipping($adresse){
+    private function calculateShipping(string $adresse){
         if ($adresse === 'Bordeaux'){
             return 5;
         }
         return 10;
     }
 
-    private function validatePayement($modePaiement, $total){
+    private function validatePayement(string $modePaiement, float $totalTtc):bool{
         return true;
     }
 

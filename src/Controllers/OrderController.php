@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Services\OrderService;
 
 class OrderController{
-    private $orderService;
+    private OrderService $orderService;
 
     public function __construct()
     {
@@ -13,7 +13,7 @@ class OrderController{
     }
     public function store(){
         // Recuperation des données du formulaire
-        $idUser = $_POST['idUser']; 
+        $idUser = $_SESSION['idUser']; 
         $idPlat = $_POST['idPlat'];
         $nbPersonnes = $_POST['nbPersonnes'];
         $adresse = $_POST['adresse'];
@@ -30,7 +30,6 @@ class OrderController{
 
         //Affichage dse vues
         if ($result['success']){
-            $numero = $result['numero_suivi'];
             require __DIR__ . '/../Views/OrderSucces.php';
         }else{
             $error = $result['message'];

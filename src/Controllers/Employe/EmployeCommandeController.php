@@ -4,7 +4,7 @@ namespace App\Controllers\Employe;
 use App\Services\EmployeCommandeService;
 
 class EmployeCommandeController{
-    private $employeCommandeService;
+    private EmployeCommandeService $employeCommandeService;
 
     public function __construct()
     {
@@ -14,28 +14,32 @@ class EmployeCommandeController{
 //Affiche moi la liste ds commande
     public function index(){
 
-        if ($_SESSION['role'] !=='employe'){
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !=='employe'){
             die("Accès interdit");
         }
 
         $commandes = $this->employeCommandeService->getAllCommandes();
 
-        require __DIR__ . '/../Views/OrderEmploye.php'; 
+        require __DIR__ . '/../../Views/OrderEmploye.php'; 
 
     }
 
     //Valider une commande
 
     public function valider(){
-        if ($_SESSION['role'] !=='employe'){
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !=='employe'){
             die ('Accès interdit');
         }
 
-        $idCommande = $_POST['id'];
+        $data = json_decode(
+            file_get_contents('php://input'), true
+        );
+
+        $idCommande = $data['id'] ?? null;
 
         $this->employeCommandeService->validerCommande($idCommande);
 
-        header('Location: /employeCommandes');
+        header('Location: /employe/Commandes');
         exit();
     }
 }

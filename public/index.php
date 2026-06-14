@@ -15,6 +15,7 @@ use App\Controllers\PlatController;
 use App\Controllers\ReviewController;
 use App\Controllers\Admin\AdminCommandeController;
 use App\Controllers\Employe\EmployeCommandeController;
+use App\Controllers\HomeController;
 
 //Demarrer une session ou reprend la sesssion existante
 session_start();
@@ -29,15 +30,23 @@ $router = new Router();
     //données sensibles envoyées en methode POST
 
     // AUTHENFICATION
+$router->get('/',[HomeController::class, 'index']);
+$router->get('/accueil',[HomeController::class, 'index']);
 $router->post('/inscription', [UserController::class, 'register']);
+$router->get('/inscription', [UserController::class, 'register']);
 $router->post('/connexion',[UserController::class, 'login']);
+$router->get('/connexion',[UserController::class, 'login']);
 $router->get('/deconnexion',[UserController::class, 'logout']);
 
     //---------------------USER
 $router->post('/review', [ReviewController::class, 'store']);
 $router->post('/order', [OrderController::class, 'store']);
-    //Recuperation des données methode GET
+
 $router->get('/search', [PlatController::class, 'search']);
+$router->get('/menu',[PlatController::class, 'menu']);
+$router->post('/panier/add', [PlatController::class, 'addToCart']);
+$router->get('/panier', [PlatController::class, 'panier']);
+$router->get('/avis',[ReviewController::class, 'avis']);
 
     //--------------------ADMIN
 $router->get('/admin/commandes',[AdminCommandeController::class, 'index']);
@@ -45,7 +54,7 @@ $router->post('/admin/commandes/valider', [AdminCommandeController::class,'valid
 
 //--------------------EMPLOYE
 $router->get('/employe/commandes',[EmployeCommandeController::class, 'index']);
-$router->post('/employe/commandes/valider', [EmployeCommandeController::class,'valider']);
+$router->post('/employe/commandes/prepare', [EmployeCommandeController::class,'prepare']);
 
 
 //Dispatch (Mainenan applique les)

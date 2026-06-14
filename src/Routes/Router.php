@@ -5,11 +5,11 @@ namespace App\Routes;
 class Router{
     private array $routes = [];
 
-    public function get($uri, $action){
+    public function get(string $uri,array $action): void{
         $this->routes['GET'][$uri] = $action;
     }
 
-    public function post ($uri, $action){
+    public function post (string $uri, array $action): void{
         $this->routes['POST'][$uri] = $action;
     }
 

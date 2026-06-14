@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 use App\Services\AdminCommandeService;
 
 class AdminCommandeController{
-    private $adminCommandeService;
+    private AdminCommandeService $adminCommandeService;
 
     public function __construct()
     {
@@ -31,11 +31,15 @@ class AdminCommandeController{
             die ('Accès interdit');
         }
 
-        $idCommande = $_POST['id'];
+        $data = json_decode(
+            file_get_contents('php://input'), true
+        );
+
+        $idCommande = $data['id'] ?? null;
 
         $this->adminCommandeService->validerCommande($idCommande);
+        echo json_encode(['success' => true]);
 
-        header('Location: /admin/commandes');
         exit();
     }
 }

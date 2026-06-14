@@ -7,27 +7,39 @@
     <link rel="stylesheet" href="/asset/CSS/Styles.css">
 </head>
 <body>
-    <nav>
+    <nav class="navBar">
         <div class="logo">
-            <img src="/public/asset/images/Logo_Vite_Goumourmand_Gemini_Generated_Image.png" alt="Logo vite et gourmand">
+            <img src="/asset/images/Logo_Vite_Goumourmand_Gemini_Generated_Image.png" alt="Logo vite et gourmand">
         </div>
 
-        <ul>
-            <li><a href="/accueil">ACCUEIL</a></li>
-            <li><a href="/cartes">CARTES</a></li>
-            <li><a href="/apropos">A PROPOS</a></li>
-            <li><a href="/avis">AVIS</a></li>
+        <ul class="listNav">
+            <li class="nav"><a href="/accueil">ACCUEIL</a></li>
+            <li class="nav"><a href="/menu">MENU</a></li>
+            <li class="nav"><a href="/apropos">A PROPOS</a></li>
+            <li class="nav"><a href="/avis">AVIS</a></li>
+            
+            <?php
+            /*Si connectee  */ 
+            if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                <li><a href="/admin/commandes">Admin</a></li>
+            <?php endif; ?>
+
+            <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'employe'): ?>
+                <a href="/employe/commandes">Admin</a>
+            <?php endif; ?>
+            
             <?php
             /*Ici si l'utilisateur est connecter on affiche deconnexion**/
-            if (isset($_SESSION['utilisateur'])): ?>
-                <li><a href="/deconnexion">DECONNECTION</a></li>
+            if (isset($_SESSION['idUser'])): ?>
+            Bonjour <?= $_SESSION['email']; ?>
+                <li class="nav"><a href="/deconnexion">DECONNECTION</a></li>
 
             <?php else: ?>
-                <li><a href="/connexion">CONNECTION</a></li>
+                <li class="nav"><a href="/connexion">CONNECTION</a></li>
             <?php endif; ?>
-                
+            
+            <li class="nav"><a href="/panier">PANIER</a></li>
         </ul>
     </nav>
-    
 </body>
 </html>

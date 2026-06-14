@@ -4,7 +4,7 @@ namespace App\Services;
 use App\Repositories\UserRepository;
 
 class UserService{
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct()
     {
@@ -13,9 +13,15 @@ class UserService{
 
     // ----- -----------------------INSCRIPTION------------------------------
 
-    public function register($email,$utilisateur, $motDePasse){
+    public function register(
+        string $email,
+        string $nom, 
+        string $motDePasse, 
+        int $telephone, 
+        string $adresse, 
+        string $ville){
         // On verifie des champs ne doit pas etre vide
-        if(empty($email) || empty($utilisateur) || empty($motDePasse)){
+        if(empty($email) || empty($nom) || empty($prenom) || empty($motDePasse)){
             return[
                 'success'=>false,
                 'message'=>'Tous les champs sont obligatoires'
@@ -32,7 +38,7 @@ class UserService{
         }
 
         //VERIFIER L4UTILISATEUR
-        if ($this->userRepository->userExists($email, $utilisateur)){
+        if ($this->userRepository->userExists($email, $nom)){
             return[
                 'success' => false,
                 'message' => "Email ou nom d/'utilisateur deja utilsé"
@@ -43,7 +49,7 @@ class UserService{
         $hashedPassword= password_hash($motDePasse, PASSWORD_BCRYPT);
 
         //On creer l'utilisateur avec le mot de pass hasher
-        $this->userRepository->createUser($email, $utilisateur, $hashedPassword);
+        $this->userRepository->createUser($email, $nom, $prenom, $hashedPassword, $telephone, $adresse, $ville);
 
         // Envoyer un email de bienvenu
 
@@ -55,7 +61,9 @@ class UserService{
 
         // ----- -----------------------CONNEXION------------------------------
 
-    public function login($email, $motDePasse, $utilisateur){
+    public function login(
+        string $email, 
+        string $motDePasse){
         if( empty($email) || empty($motDePasse)){
             return [
                 'success' => false,
@@ -63,6 +71,7 @@ class UserService{
             ];
         }
 
+        //recuperation de l'utilisateur depuis la BDD
         $utilisateur = $this->userRepository->getUserByEmail($email);
 
         if (!$utilisateur){
@@ -71,6 +80,8 @@ class UserService{
                 'message' => 'Email incorrect'
             ];
         }
+
+        //Verification mot de passe
         if (!password_verify($motDePasse, $utilisateur['motDePasse'])){
             return[
                 'success' => false,
@@ -78,13 +89,13 @@ class UserService{
             ];
         }
 
-        // On cree un session 
-        $_SESSION['idUser'] = $utilisateur['id'];
-        $_SESSION['role'] = $user ['role'] ?? 'utilisateur';
-
-        return [
-            'success' => true
+        //On retourne l'utilisateur au controlleur
+        return[
+            'success'=>true,
+            'user'=>$utilisateur
         ];
+
+        
     }
 
 

@@ -3,11 +3,15 @@ namespace App\Controllers;
 use App\Services\ReviewService;
 
 class ReviewController{
-    private $reviewService;
+    private ReviewService $reviewService;
 
     public function __construct()
     {
         $this->reviewService = new ReviewService();
+    }
+        
+    public function index(){
+        require __DIR__. '/../Views/Avis.php';
     }
 
     public function store(){
