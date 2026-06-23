@@ -13,7 +13,8 @@ class ReviewRepository{
     }
 
     public function insertReview(
-        int $idUser, 
+        int $idUser,
+        string $statut, 
         string $commentaire):void{
 
         $stmt = $this->pdo->prepare(

@@ -32,7 +32,7 @@ class UserRepository
         string $nom, 
         string $prenom, 
         string $motDePasse, 
-        int $numTelephone, 
+        string $numTelephone, 
         string $adresse,
         string $ville)
     {

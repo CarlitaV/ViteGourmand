@@ -2,16 +2,20 @@
 namespace App\Controllers;
 
 use App\Services\PlatService;
+use App\Repositories\PlatRepository;
 
 class PlatController{
     private PlatService $platService;
+    private PlatRepository $platRepository;
 
     public function __construct()
     {
         $this->platService = new PlatService();
+        $this->platRepository = new PlatRepository();
     }
 
     public function menu(){
+        $plats = $this->platService->getAllPlats();
         require __DIR__ . '/../Views/Menu.php';
     }
     
@@ -27,6 +31,14 @@ class PlatController{
     //Affichage du panier
     public function panier(){
         $panier = $_SESSION['panier'] ?? [];
+        $plats = [];
+
+        foreach($panier as $idPlat => $quantite){
+            $plat = $this->platRepository->findById($idPlat);
+            $plat['quantite'] = $quantite;
+
+        $plats[] = $plat;
+        }
         require __DIR__ . '/../Views/Panier.php';
     }
 
@@ -51,5 +63,14 @@ class PlatController{
         }
 
         echo json_encode(["success"=>true]);
+    }
+
+    public function deleteFromCart():void{
+        $idPlat = $_POST['idPlat'];
+
+        unset($_SESSION['panier'][$idPlat]);
+
+        header('Location: /panier');
+        exit();
     }
 }

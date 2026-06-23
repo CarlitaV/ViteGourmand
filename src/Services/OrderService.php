@@ -9,19 +9,20 @@ use App\Repositories\StatRepository;
 class OrderService{
     private OrderRepository $orderRepository;
     private PlatRepository $platRepository;
-    private StatRepository $sta
+    private StatRepository $statRepository;
 
     public function __construct()
     {
         $this->orderRepository = new OrderRepository();
         $this->platRepository = new PlatRepository();
+        $this->statRepository = new StatRepository();
     }
 
     public function createOrder(
         int $idUser, 
         int $idPlat, 
         int $nbPersonnes, 
-        string $adresse, 
+        string $adresseLivraison, 
         string $modePaiement):array{
 
         //Verification de l'authentification
@@ -54,7 +55,7 @@ class OrderService{
         }
 
         //Calcul des frais de livraison
-        $frais = $this->calculateShipping($adresse);
+        $frais = $this->calculateShipping($adresseLivraison);
 
         //TVA 20%
         $tva = $totalHt * .20;
@@ -75,7 +76,7 @@ class OrderService{
 
         //Inserer commande
         $this->orderRepository->insertOrder(
-            $adresse,
+            $adresseLivraison,
             $idUser,
             $nbPersonnes,
             'en_attente',
@@ -100,8 +101,8 @@ class OrderService{
         return !empty($idUser);
     }
 
-    private function calculateShipping(string $adresse){
-        if ($adresse === 'Bordeaux'){
+    private function calculateShipping(string $adresseLivraison){
+        if ($adresseLivraison === 'Bordeaux'){
             return 5;
         }
         return 10;

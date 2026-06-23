@@ -14,16 +14,28 @@ class OrderRepository{
     }
 
     public function insertOrder(
-        int $idUser,
         string $adresseLivraison,
+        int $idUser,
         int $nbPersonnes,
+        string $statut,
         float $totalHt, 
+        float $totalTtc,
+        string $numeroSuivi
+
         ):void{
         $stmt = $this->pdo->prepare(
             "INSERT INTO Commande (
-            adresseLivraison, nbPersonne, statut, totalHt, idUser) VALUE (?, ?, ?, ?, ?) "
+            adresseLivraison, 
+            idUser, 
+            nbPersonnes, 
+            statut,
+            totalHt, 
+            totalTtc,  
+            numeroSuivi
+            ) 
+            VALUE (?, ?, ?, ?, ?, ?, ?) "
         );
 
-        $stmt->execute([$idUser, $adresseLivraison, $nbPersonnes, $totalHt, 'en_attente']);
+        $stmt->execute([$adresseLivraison, $idUser, $nbPersonnes, $statut, $totalHt, $totalTtc, $numeroSuivi]);
     }
 }

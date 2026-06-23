@@ -30,6 +30,10 @@ class OrderController{
 
         //Affichage dse vues
         if ($result['success']){
+            //la panier se vide apres le succes
+            $_SESSION['panier'] = [];
+
+            $numeroSuivi = $result['message'];
             require __DIR__ . '/../Views/OrderSucces.php';
         }else{
             $error = $result['message'];

@@ -10,6 +10,9 @@
     <section class="formContact">
         <h2>Connexion</h2>
         <form class="format" action="/connexion" method="post">
+            <div class="logo">
+                <img src="/../asset/images/Logo_Vite_Goumourmand_Gemini_Generated_Image.png" alt="">
+            </div>
             <div>
                 <label for="">Email :</label>
                 <input type="email" name="email" required>
@@ -26,7 +29,7 @@
             
         </form>
 <br>
-        <p>Pas encore inscrit ? <a href="/register">Créér votre compte</a></p>
+        <p>Pas encore inscrit ? <a href="/inscription">Créér votre compte</a></p>
         
     </section>
     

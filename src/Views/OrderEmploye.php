@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/asset/CSS/Styles.css">
-    <title>Commande à traiter</title>
-</head>
-<body>
+
     <?php require __DIR__ . '/includes/header.php'; ?> 
 
     <h1>Commande à traiter </h1>
@@ -15,24 +7,25 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Plat</th>
-                <th>Quantité</th>
+                <th>Adresse</th>
+                <th>Nb Personnes</th>
                 <th>Statut</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
+            <?php /** @var array $commandes */?>
             <?php foreach ($commandes as $commande):?>
                 <tr>
                     <td><?= $commande['idCommande']; ?></td>
-                    <td><?= $commande['idPlat']; ?></td>
-                    <td><?= $commande['ndPersonnes']; ?></td>
+                    <td><?= $commande['adresseLivraison']; ?></td>
+                    <td><?= $commande['nbPersonnes']; ?></td>
                     <td><?= $commande['statut']; ?></td>
                     <td>
-                        <?php if ($commande['statut'] !== 'en attente'): ?>
-                            <form method="POST" action="/employe/valider">
+                        <?php if ($commande['statut'] === 'en_attente'): ?>
+                            <form method="POST" action="/employe/commandes/prepare">
                                 <input type="hidden" name="id" value="<?=  $commande['idCommande']; ?>">
-                                <button type="submit"> Valider</button>
+                                <button type="submit"> Préparee</button>
                             </form>
                         <?php endif; ?>
                     </td>
@@ -42,5 +35,3 @@
     </table>
     
     <?php require __DIR__ . '/includes/footer.php'; ?>
-</body>
-</html>

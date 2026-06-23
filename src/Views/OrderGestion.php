@@ -7,7 +7,7 @@
     <title>Gestion des Commande</title>
 </head>
 <body>
-    <?php require __DIR__ . '/includes/header.php'; ?> 
+    <?php require_once __DIR__ . '/includes/header.php'; ?> 
 
     <h1>Gestion des Commandes (Admin) </h1>
 
@@ -22,15 +22,19 @@
             </tr>
         </thead>
         <tbody>
+            
+        <?php
+        /**@var array $commandes */
+        ?>
             <?php foreach ($commandes as $commande):?>
                 <tr>
                     <td><?= $commande['idCommande']; ?></td>
                     <td><?= $commande['idUser']; ?></td>
-                    <td><?= $commande['total']; ?></td>
+                    <td><?= $commande['totalHt']; ?></td>
                     <td><?= $commande['statut']; ?></td>
                     <td>
                         <?php if ($commande['statut'] !== 'validée'): ?>
-                            <form method="POST" action="/admin/valider">
+                            <form method="POST" action="/admin/commandes/valider">
                                 <input type="hidden" name="id" value="<?=  $commande['idCommande']; ?>">
                                 <button class="btnValider" type="submit"> Valider</button>
                             </form>
@@ -41,6 +45,4 @@
         </tbody>
     </table>
     
-    <?php require __DIR__ . '/includes/header.php'; ?> 
-</body>
-</html>
+    <?php require_once __DIR__ . '/includes/footer.php'; ?> 

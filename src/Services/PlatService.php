@@ -20,4 +20,7 @@ class PlatService{
         return $this->platRepository->findByName($keyword);
 
     }
+    public function getAllPlats():array{
+        return $this->platRepository->findAll();
+    }
 }

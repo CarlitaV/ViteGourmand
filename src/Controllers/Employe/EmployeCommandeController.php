@@ -24,22 +24,17 @@ class EmployeCommandeController{
 
     }
 
-    //Valider une commande
-
-    public function valider(){
-        if (!isset($_SESSION['role']) || $_SESSION['role'] !=='employe'){
-            die ('Accès interdit');
+    public function prepare(){
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'employe') {
+            die('Accès interdit');
         }
 
-        $data = json_decode(
-            file_get_contents('php://input'), true
-        );
+        $idCommande = (int)($_POST['id']  ?? 0);
+        if ($idCommande > 0){
+            $this->employeCommandeService->preparerCommande($idCommande);
+        }
 
-        $idCommande = $data['id'] ?? null;
-
-        $this->employeCommandeService->validerCommande($idCommande);
-
-        header('Location: /employe/Commandes');
+        header('Location: /employe/commandes');
         exit();
     }
 }

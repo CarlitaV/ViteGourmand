@@ -31,15 +31,19 @@ class AdminCommandeController{
             die ('Accès interdit');
         }
 
-        $data = json_decode(
-            file_get_contents('php://input'), true
-        );
-
-        $idCommande = $data['id'] ?? null;
+        $idCommande = (int)($_POST['id'] ?? 0);
 
         $this->adminCommandeService->validerCommande($idCommande);
-        echo json_encode(['success' => true]);
+        header('Location: /admin/commandes');
 
         exit();
+    }
+
+    //Affiche les stats
+    public function stats(){
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin'){
+            die('Accès interdit');
+        }
+        require __DIR__ .'/../../Views/stats.php';
     }
 }

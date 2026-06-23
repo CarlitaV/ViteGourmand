@@ -16,8 +16,9 @@ class UserService{
     public function register(
         string $email,
         string $nom, 
+        string $prenom,
         string $motDePasse, 
-        int $telephone, 
+        string $telephone, 
         string $adresse, 
         string $ville){
         // On verifie des champs ne doit pas etre vide

@@ -24,8 +24,9 @@ class UserController{
         //On recupere les données envoyyées par le formulaire
         $email = $_POST['email'] ?? null;
         $nom = $_POST['nom'] ?? null;
+        $prenom = $_POST['prenom'] ?? null;
         $motDePasse = $_POST['motDePasse'] ?? null; 
-        $telephone = $_POST['telephone'] ?? null;
+        $telephone = $_POST['numTelephone'] ?? null;
         $adresse = $_POST['adresse'] ?? null;
         $ville = $_POST['ville'] ?? null;
 
@@ -33,6 +34,7 @@ class UserController{
         $result = $this->userService->register(
             $email,
             $nom, 
+            $prenom,
             $motDePasse,
             $telephone,
             $adresse,

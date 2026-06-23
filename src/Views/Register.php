@@ -11,49 +11,53 @@
         <h2>Créer un compte</h2>
 
         <?php if(isset($error)): ?>
-            <p style="color:red"><?htmlspecialchars($error) ?></p>
+            <p style="color:red"><?= htmlspecialchars($error) ?></p>
         <?php endif; ?>
 
         <form  action="/inscription" method="POST">
             <div>
                 <label for="">Nom d'utilisateur :</label>
-                <input type="text" name="utilisateur" required>
+                <input type="text" name="nom" required>
                 <br><br>
             </div>
             
             <div>
                 <label for="">Prenom :</label>
-                <input type="prenom" name="prenom" required>
+                <input type="text" name="prenom" required>
                 <br><br>
             </div>
 
             <address>
                 <label for="">Adresse :</label>
-                <input type="adresse" name="adresse" required>
+                <input type="text" name="adresse" required>
                 <br><br>
             </address>
+            <div>
+                <label for="">Ville</label>
+                <input type="text" name="ville" required>
+            </div>
 
             <div>
                 <label for="tel">Telephone :</label>
-                <input type="tel" name="numTelephone" id="tel" pattern="[0-9]{10}">
+                <input type="text" name="numTelephone" id="tel" pattern="[0-9]{10}" require>
             </div><br>
 
             <div>
                 <label for="">Email :</label>
-                <input type="email" name="email" required>
+                <input type="text" name="email" required>
                 <br><br>
             </div>
             
             <div>
                 <label for="">Mot de passe :</label>
-                <input type="password" name="motDePasse" required>
+                <input type="text" name="motDePasse" required>
                 <br><br>
             </div>
 
             <button type="submit">S'inscrire</button>
 
         </form>
-        <p> Déja un compte ? <a href="/login">Se connecter</a></p> 
+        <p> Déja un compte ? <a href="/connexion">Se connecter</a></p> 
     </section>
 
 </body>

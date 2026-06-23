@@ -4,7 +4,7 @@ namespace App\Services;
 use App\Repositories\Employe\CommandeRepository;
 
 class EmployeCommandeService{
-    private $commandeRepository;
+    private CommandeRepository $commandeRepository;
 
     public function __construct()
     {
@@ -16,7 +16,10 @@ class EmployeCommandeService{
         return $this->commandeRepository->findAll();
     }
 
-    public function validerCommande($id){
+    public function validerCommande(int $id): bool{
         return $this->commandeRepository->updateStatut($id, 'validee');
+    }
+    public function preparerCommande(int $id): bool{
+        return $this->commandeRepository->updateStatut($id, 'preparation');
     }
 }

@@ -36,6 +36,7 @@ h2 {
     font-size: 2rem;
     margin-bottom: 20px;
     font-weight: 600;
+    justify-content: center;
 }
 
 h3 {

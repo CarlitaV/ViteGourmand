@@ -45,12 +45,16 @@ $router->post('/order', [OrderController::class, 'store']);
 $router->get('/search', [PlatController::class, 'search']);
 $router->get('/menu',[PlatController::class, 'menu']);
 $router->post('/panier/add', [PlatController::class, 'addToCart']);
+$router->post('/panier/delete',[PlatController::class, 'deleteFromCart']);
 $router->get('/panier', [PlatController::class, 'panier']);
-$router->get('/avis',[ReviewController::class, 'avis']);
+$router->get('/avis',[ReviewController::class, 'index']);
+$router->get('/apropos',[HomeController::class,'apropos']);
 
     //--------------------ADMIN
 $router->get('/admin/commandes',[AdminCommandeController::class, 'index']);
 $router->post('/admin/commandes/valider', [AdminCommandeController::class,'valider']); //post modifie le statut de la commande
+$router->get('/admin/stats', [AdminCommandeController::class, 'stats']);
+
 
 //--------------------EMPLOYE
 $router->get('/employe/commandes',[EmployeCommandeController::class, 'index']);

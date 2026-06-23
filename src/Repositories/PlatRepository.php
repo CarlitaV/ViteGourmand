@@ -20,6 +20,20 @@ class PlatRepository{
         $stmt->execute(["%$keyword%"]);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+    public function findById(int $id): ?array{
+        $stmt = $this->pdo->prepare(
+            "SELECT * FROM Plat WHERE idPlat = ?"
+        );
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function findAll() : array{
+        $stmt = $this->pdo->query
+        ("SELECT * FROM Plat"
+        );
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function getStock( int $idPlat){
         $stmt = $this->pdo->prepare( "SELECT stockDisponible FROM Plat WHERE idPlat = ?");

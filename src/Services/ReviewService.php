@@ -12,7 +12,7 @@ class ReviewService{
         $this->reviewRepository = new ReviewRepository();
     }
 
-    public function addReview(int $idUser, int $idPlat, string $commentaire){
+    public function addReview(int $idUser, int $idPlat, string $commentaire):array{
         //Dabord je verifie l'authentification
         if (empty($idUser)){
             return[
@@ -25,12 +25,12 @@ class ReviewService{
         if (empty($commentaire)){
             return[
                 'success' => false,
-                'message' => 'Commentaire vite'
+                'message' => 'Commentaire vide'
             ];
         }
 
         // je peut enfin insere l'avis
-        $this->reviewRepository->insertReview($idUser, $commentaire);
+        $this->reviewRepository->insertReview($idUser,$idPlat, $commentaire);
         return ['success' => true];
     }
 }
