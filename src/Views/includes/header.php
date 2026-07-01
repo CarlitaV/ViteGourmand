@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/asset/CSS/Styles.css">
-</head>
-<body>
+
     <nav class="navBar">
         <div class="logo">
             <img src="/asset/images/Logo_Vite_Goumourmand_Gemini_Generated_Image.png" alt="Logo vite et gourmand">
         </div>
+        <img class="burger" src="/asset/images/icone_menu.png" alt="menu burger">
 
-        <ul class="listNav">
+        <ul class="listNav active" id="menu">
             <li class="nav"><a href="/accueil">ACCUEIL</a></li>
             <li class="nav"><a href="/menu">MENU</a></li>
             <li class="nav"><a href="/apropos">A PROPOS</a></li>
@@ -45,5 +38,3 @@
             <?php endif; ?>
         </h2>
     </nav>
-</body>
-</html>

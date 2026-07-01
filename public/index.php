@@ -32,6 +32,8 @@ $router = new Router();
     // AUTHENFICATION
 $router->get('/',[HomeController::class, 'index']);
 $router->get('/accueil',[HomeController::class, 'index']);
+$router->get('/mention-legales', [HomeController::class, 'mentionLegales']);
+$router->get('/cgv', [HomeController::class, 'cgv']);
 $router->post('/inscription', [UserController::class, 'register']);
 $router->get('/inscription', [UserController::class, 'register']);
 $router->post('/connexion',[UserController::class, 'login']);

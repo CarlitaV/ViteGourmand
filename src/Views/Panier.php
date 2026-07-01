@@ -1,4 +1,12 @@
-    
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/asset/CSS/Styles.css">
+    <title>Mon panier</title>
+</head>
+<body>  
 <?php require_once __DIR__ .'/includes/header.php'?>
 
 <h2>Mon panier</h2>
@@ -8,6 +16,7 @@
     $totalPanier = 0; 
     $tva = 0; 
     $totalTtc = 0;
+    $fraisLivraison = 10;
     ?>
 <?php foreach($plats as $plat): ?>
 
@@ -28,6 +37,7 @@
             <?= $plat['prix'] ?> €</p>
         <p>Total HT : <?= $totalPanier ?></p>
         <p>TVA (20%) : <?= $totalPanier * .20 ?> € </p>
+        <p>Frais de livraison : <?=  $fraisLivraison ?></p>
         <p>Total TTC : <?= $totalTtc ?> € </p>
 
         <form method="POST" action="/panier/delete">
@@ -71,3 +81,6 @@
 </form>
 
 <?php require_once __DIR__ .'/includes/footer.php'?>
+
+</body>
+</html>

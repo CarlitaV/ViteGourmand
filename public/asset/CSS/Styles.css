@@ -56,8 +56,12 @@ p {
     padding: 15px 40px; 
     background-color: #F5F0E1;
     align-items: center;
-    justify-content: space-around;
+    /*flex-wrap: wrap;/**/
+    justify-content: space-between;
 
+}
+.burger{
+    display: none;
 }
 .listNav{
     display: flex;    
@@ -66,7 +70,7 @@ p {
     margin: 15px;
 }
 .nav{
-    margin: 15px;
+    margin: 15px 20px;
 }
 .nav a{
     text-decoration: none;
@@ -80,16 +84,20 @@ p {
 
 /*********************** HERO SECTION *******************************/
 .container {
-    height: 894px;
     position: relative;
+    min-height: 100vh;
+    height: 100%;
     text-align: center;
     color: white;
-    contain: strict;
 }
-
-.imgAccueil {
+.imgAccueil{
     width: 100%;
-    height: 894px;
+    height: auto;
+}
+.imgAccueil img{
+    width: 100%;
+    height: 650px;
+    display: block;
     object-fit: cover;
     border-radius: 16px;
 }
@@ -114,7 +122,8 @@ p {
     background-color:#F5F0E1;
     position:absolute;
     height: 200px;
-    width: 400px;
+    width: 90%;
+    max-width: 400px;
     padding: 20px;
     border-radius: 16px;
     top: 75%;
@@ -144,15 +153,17 @@ button:hover {
 /*********************** CARDS *******************************/
 
 .cards {
-    max-width: 1200px;
+    width: 100%;
     height: 100%;
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .card {
     width: 368px;
+    max-width: 500px;
     flex: 1;
     background-color: white;
     padding: 30px;
@@ -166,9 +177,9 @@ button:hover {
     transform: translateY(-5px);
 }
 .imgCard{
-    width: 320px; ;
-    height: 300px;
-    contain: strict;
+    width: 100%;
+    height: 80%;
+
 }
 /************************EXPERIENCE SECTION*******************************/
 .experience{
@@ -202,6 +213,7 @@ button:hover {
     display: grid;
     grid-template-columns: repeat(2,1fr);
     height: auto;
+    gap: 20px;
 }
 .formContact h2, p{
     text-align: center;
@@ -277,7 +289,8 @@ textarea {
 }
 #resultats{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: 2fr 2fr;
+    justify-items: center;
     /*display: flex;
     flex-wrap: wrap;*/
     gap: 20px ;
@@ -338,7 +351,28 @@ footer{
 
 
 /*********************** RESPONSIVE *******************************/
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
+    section{
+        padding: 30px 15px;
+    }
+    h1{
+        font-size: 2rem;
+    }
+    h2{
+        font-size: 1.6rem;
+    }
+    h3{
+        font-size: 1.2rem;
+    }
+    .listNav{
+        align-items: center;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .container{
+        height: auto;
+    }
 
     .cards {
         flex-direction: column;
@@ -346,9 +380,74 @@ footer{
 
     .container h1 {
         font-size: 2rem;
+        width: 90%;
     }
 
-    .imgAccueil {
-        height: 60vh;
+    .imgAccueil img{
+        height: 320px;
+        width: 100%;
+    }
+    .formRecherche{
+        display: block;
+        position: static;
+        transform: none;
+        margin:  20px auto;
+        width: 100%;
+        max-width: 400px;
+    }
+    .cards{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .card{
+        width: 100%;
+        max-width: 420px;
+    }
+    .imgCard{
+        width: 100%;
+        height: auto;
+    }
+    .contactMap{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    #resultats{
+        grid-template-columns: auto;
+    }
+    .adminTable{
+        display: block;
+        overflow-x: auto;
+    }
+    footer{
+        padding: 40px 20px;
+        text-align: center;
+    }
+}
+@media(max-width: 768px){
+    .burger{
+        display:block;
+        font-size: 30px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .listNav{
+        display:none;
+        position:absolute;
+        top:80px;
+        left:0;
+        width:100%;
+        background:#F5F0E1;
+        flex-direction:column;
+        padding:20px;
+        z-index:999;
+    }
+    .listNav.active{
+        display:flex;
+    }
+    .nav{
+        margin:10px 0;
     }
 }

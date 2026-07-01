@@ -18,31 +18,28 @@
             <button type="submit">Recherche</button>
         </form>
 
-        <!--<div >
-            <button type="button">Commander Maintenant</button>
-        </div>-->
     </section>
     <section class="cards">
-        <article class="card">
+        <a href="/menu" class="card">
             <img class="imgCard" src="/asset/images/Plat_nos_menus_ChatGPT.png" alt="">
             <h3>Nos Menus</h3>
             <p>Découvrez nos offres</p>
-        </article>
-        <article class="card">
+        </a>
+        <a href="/avis" class="card">
             <img class="imgCard" src="/asset/images/Avis_Client_Gemini_Generated_Image.png" alt="">
             <h3>Avis Clients</h3>
             <p>Ce que disent nos clients</p>
-        </article>
-        <article class="card">
+        </a>
+        <a href="#contact" class="card">
             <img class="imgCard" src="/asset/images/Nous_contacter_ChatGPT.png" alt="">
             <h3>Contacter-Nous</h3>
             <p>Ecrivez-nous ou appellez nous</p>
-        </article>
+        </a>
     </section>
     <section class="experience">
         <h2>Une expérience gastronomique unique</h2>
         <p>Découvrez une cuisine raffinée où créativité et produits de saison se rencontrent. Chaque plat est pensé avec passion pour éveiller vos sens, dans un cadre élégant et chaleureux. Notre équipe vous accueille pour transformer chaque repas en un moment d’exception.</p>
-        <button class="btnCommander" type="button">Réserver une table</button>
+        <a href="/menu">Découvrire nos menus</a>
     </section>
     <section class="info">
         <h2> Infos pratiques</h2>
@@ -64,14 +61,20 @@
         <br>
 
     </section>
-    <section class="horaires">
+    <section id="horaires" class="horaires">
         <h2>Horaires</h2>
-        <p>Lundi Mardi</p>
-        <p>Mercredi Samedi</p>
-        <p>Dimanche</p>
+        <p>
+        Lundi : 10h - 22h<br>
+        Mardi : 10h - 22h<br>
+        Mercredi : 10h - 22h<br>
+        Jeudi : 10h - 22h<br>
+        Vendredi : 10h - 23h<br>
+        Samedi : 10h - 23h<br>
+        Dimanche : 10h - 22h
+        </p>
 
     </section>
-    <section class="formContact">
+    <section id="contact" class="formContact">
         <h2 class="titreContact">Nous contacter</h2>
         <p class="pContact">Vous désirez nous contacter ? Remplissez le formulaire ci-dessous !</p>
         <div class="contactMap">

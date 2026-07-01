@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/asset/CSS/Styles.css">
+    <title>Nos Menu</Menu></title>
+</head>
+<body>
 <?php require_once __DIR__ .'/includes/header.php'?>
 
 <h2>Nos Menus</h2>
@@ -11,3 +20,6 @@
 
 
 <?php require_once __DIR__ .'/includes/footer.php'?>
+    
+</body>
+</html>

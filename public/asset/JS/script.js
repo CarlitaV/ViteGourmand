@@ -15,6 +15,15 @@ document.addEventListener("DOMContentLoaded", function(){
     loadAllPlats(); // affiche tous les plats au chargement
 
 });
+/*=========================MENU BURGER==============================*/
+const burger = document.getElementById("burger");
+const menu = document.getElementById("menu");
+
+if(burger){
+    burger.addEventListener("click",()=>{
+        menu.classList.toggle("active");
+    });
+}
 /*==========================AFFICHER PLATS==========================*/
 
 
