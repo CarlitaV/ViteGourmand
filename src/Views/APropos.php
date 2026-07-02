@@ -1,4 +1,12 @@
-<?php require_once __DIR__ .'/includes/header.php'?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <link rel="stylesheet" href="/asset/CSS/Styles.css">
+</head>
+<body>
+    <?php require_once __DIR__ .'/includes/header.php'?>
 
 <section>
     <h2> L'histoire de Vite & Gourmand</h2>
@@ -12,3 +20,5 @@
 
 </section>
 <?php require_once __DIR__ .'/includes/footer.php'?>
+</body>
+</html>

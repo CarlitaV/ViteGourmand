@@ -28,6 +28,13 @@ class ReviewService{
                 'message' => 'Commentaire vide'
             ];
         }
+        //Verfifier si plat existe
+        if ($idPlat <= 0) {
+            return [
+                'success' => false,
+                'message' => 'Plat invalide'
+            ];
+        }
 
         // je peut enfin insere l'avis
         $this->reviewRepository->insertReview($idUser,$idPlat, $commentaire);

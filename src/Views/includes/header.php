@@ -1,9 +1,11 @@
-
+<header>
     <nav class="navBar">
         <div class="logo">
             <img src="/asset/images/Logo_Vite_Goumourmand_Gemini_Generated_Image.png" alt="Logo vite et gourmand">
         </div>
-        <img class="burger" src="/asset/images/icone_menu.png" alt="menu burger">
+        <button id="burger" class="burger">
+            <img src="/asset/images/icone_menu.png" alt="menu burger">
+        </button>
 
         <ul class="listNav active" id="menu">
             <li class="nav"><a href="/accueil">ACCUEIL</a></li>
@@ -38,3 +40,4 @@
             <?php endif; ?>
         </h2>
     </nav>
+</header>

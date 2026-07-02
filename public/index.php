@@ -1,12 +1,4 @@
 <?php
-//Affiche les erreurs directement dans la page
-if($_ENV['APP_ENV'] === 'dev'){
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-}else{
-    ini_set('display_errors',0);
-}
-
 
 //Inclure l'autoloader (fichier generer pas composer)
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -22,12 +14,18 @@ use App\Controllers\Admin\AdminCommandeController;
 use App\Controllers\Employe\EmployeCommandeController;
 use App\Controllers\HomeController;
 
-//Demarrer une session ou reprend la sesssion existante
-session_start();
-
 //Charger nos variables d'environnemnt
 Config::load();
-
+//Affiche les erreurs directement dans la page
+//Si APP_ENV n'existe pas on considère que c'est prod
+if(($_ENV['APP_ENV'] ?? 'prod') === 'dev'){
+    ini_set('display_errors',1);
+    error_reporting(E_ALL);
+}else{
+    ini_set('display_errors',0);
+}
+//Demarrer une session ou reprend la sesssion existante
+session_start();
 
 $router = new Router();
 

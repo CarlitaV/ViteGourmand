@@ -50,6 +50,11 @@ p {
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 15px;
 }
+img{ 
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
 /*************************NAV BAR************************************/
 .navBar{
     display: flex;
@@ -85,7 +90,6 @@ p {
 /*********************** HERO SECTION *******************************/
 .container {
     position: relative;
-    min-height: 100vh;
     height: 100%;
     text-align: center;
     color: white;
@@ -225,7 +229,13 @@ button:hover {
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
+#formAvis{
+    margin: 20px 20px;
+}
 
+#formAvis textarea{
+    width: 500px;
+}
 form ul {
     list-style: none;
 }
@@ -372,6 +382,7 @@ footer{
     }
     .container{
         height: auto;
+        position: relative;
     }
 
     .cards {
@@ -388,12 +399,14 @@ footer{
         width: 100%;
     }
     .formRecherche{
-        display: block;
-        position: static;
-        transform: none;
-        margin:  20px auto;
-        width: 100%;
-        max-width: 400px;
+        position: absolute;
+        bottom: 20px;
+        transform: translate(-50%);
+        width: 90%;
+        max-width: 350px;
+        height: 35%;
+        /*width: 100%;
+        max-width: 400px;*/
     }
     .cards{
         display: flex;
@@ -425,29 +438,35 @@ footer{
         text-align: center;
     }
 }
-@media(max-width: 768px){
+@media (max-width:768px){
+
+    .navBar{
+        position:relative;
+    }
+
     .burger{
         display:block;
-        font-size: 30px;
-        background: none;
-        border: none;
-        cursor: pointer;
+        font-size:30px;
+        background:none;
+        border:none;
+        cursor:pointer;
     }
+
     .listNav{
         display:none;
         position:absolute;
-        top:80px;
+        top:100%;
         left:0;
         width:100%;
         background:#F5F0E1;
         flex-direction:column;
-        padding:20px;
-        z-index:999;
+        align-items:center;
+        z-index:1000;
     }
-    .listNav.active{
+.listNav.active{
         display:flex;
     }
-    .nav{
-        margin:10px 0;
+.nav{
+        margin:15px;
     }
 }

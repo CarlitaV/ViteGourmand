@@ -94,7 +94,7 @@
                     </li>
                     <li>
                         <label for="tel">Téléphone</label>
-                        <input type="tel" id="tel" name="numeroTelephone" pattern="[0-9] {10}" />
+                        <input type="tel" id="tel" name="numeroTelephone" pattern="^[0-9]{10}$" />
                     </li>
                     <li>
                         <label for="msg">Message</label>

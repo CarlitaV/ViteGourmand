@@ -16,7 +16,7 @@ class ReviewController{
 
     public function store(){
         //Recupere les données du formulaire
-        $idUser = $_POST['idUser'];
+        $idUser = $_SESSION['idUser'] ?? null; //l'utilisateur est deja co donc recuperation via session 
         $idplat = $_POST['idPlat'];
         $commentaire = $_POST['commentaire'];
 
