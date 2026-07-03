@@ -34,7 +34,7 @@ CREATE TABLE Commande(
     datePrestation DATETIME,
     adresseLivraison VARCHAR(255),
     nbPersonnes INT NOT NULL,
-    statut VARCHAR(50),
+    statut VARCHAR(50) DEFAULT 'en attente',
     totalHt DECIMAL(10,2),
     idUser INT NOT NULL,
     Foreign Key (idUser) REFERENCES Utilisateur(idUser)
@@ -76,11 +76,84 @@ CREATE TABLE Plat_Allergene(
 
 CREATE TABLE Avis(
     idAvis INT AUTO_INCREMENT PRIMARY KEY,
-    note INT CHECK (note BETWEEN 1 AND 5),
-    commentaire VARCHAR(500),
-    statut VARCHAR(50),
+    note INT NOT NULL CHECK (note BETWEEN 1 AND 5),
+    commentaire TEXT,
+    statut VARCHAR(50) DEFAULT 'en attente',
     idUser INT NOT NULL,
-    FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser)
+    idPlat INT NOT NULL,
+    dateAvis DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser),
+    FOREIGN KEY(idPlat) REFERENCES Plat(idPlat)
 );
 
+CREATE TABLE Contact(
+    idContact INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    prenom VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    telephone VARCHAR(20),
+    message TEXT NOT NULL,
+    dateContact DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO Role (libelle) 
+VALUES
+    ('user'),
+    ('admin'),
+    ('employe');
+
+INSERT INTO Plat(titre,description,prix,photo,stockDisponible)
+VALUES
+    ('Filet de boeuf','Sauce forestière',24.90,'boeuf.jpg',20),
+    ('Saumon grillé','Légumes de saison',18.90,'saumon.jpg',20),
+    ('Risotto aux champignons','Crémeux parmesan',15.90,'risotto.jpg',20),
+    ('Burger Gourmet','Frites maison',16.90,'burger.jpg',20),
+    ('Salade César','Poulet croustillant',13.90,'salade.jpg',20);
+
+INSERT INTO Menu(titre,description,prixPersonnel,valide)
+VALUES
+    ('Menu Midi','Entrée + Plat',19.90,TRUE),
+    ('Menu Gourmet','Entrée + Plat + Dessert',29.90,TRUE);
+
+INSERT INTO Allergene(libelle)
+VALUES
+    ('Gluten'),
+    ('Lait'),
+    ('Oeuf'),
+    ('Poisson'),
+    ('Arachides');
+
+INSERT INTO Plat_Allergene(idPlat,idAllergene)
+VALUES
+    (2,4),
+    (3,2),
+    (4,1),
+    (5,3);
+
+INSERT INTO Utilisateur(nom,prenom,email,motDePasse,idRole)
+VALUES
+    ('Admin',
+    'ViteGourmand', 
+    'admin@vitegourmand.fr',
+    '$2y$10$9O69TIhKO1BKIwey2n.bWuZpWpCNW0Oi9Bt3L2F4mAArXp0FWTSk2',
+    2
+    );
+
+INSERT INTO Utilisateur(nom,prenom,email,motDePasse,idRole)
+VALUES
+    ('Employe',
+    'Test', 
+    'employe@vitegourmand.fr',
+    '$2y$10$ENNbpOeg47335RHLwQeXtuqxKvDM3wMBZwRUWUydLCgLZfdD1bTeq',
+    3
+    );
+
+INSERT INTO Utilisateur(nom,prenom,email,motDePasse,idRole)
+VALUES
+    ('Client',
+    'Test', 
+    'client@vitegourmand.fr',
+    '$2y$10$G3Ed5B2Zt8uuXO7E.Qk3l.s4A8n0IFAF6jSyHEEK4Zn7GiKgGtRl.',
+    1
+    );
 
