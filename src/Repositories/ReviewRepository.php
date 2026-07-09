@@ -14,14 +14,16 @@ class ReviewRepository{
 
     public function insertReview(
         int $idUser,
-        string $statut, 
-        string $commentaire):void{
+        int $idPlat, 
+        string $commentaire,
+        int $note):void{
 
         $stmt = $this->pdo->prepare(
-            "INSERT INTO avis (idUser, statut, commentaire) VALUES (?, ?, ?)"
+            "INSERT INTO Avis (idUser, idPlat,statut, commentaire, note) 
+            VALUES (?, ?, ?, ?, ?)"
         );
 
 
-    $stmt->execute([$idUser, 'en_attente', $commentaire]);
+    $stmt->execute([$idUser,$idPlat, 'en_attente', $commentaire, $note]);
     }  
 }

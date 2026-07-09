@@ -12,7 +12,7 @@ class ReviewService{
         $this->reviewRepository = new ReviewRepository();
     }
 
-    public function addReview(int $idUser, int $idPlat, string $commentaire):array{
+    public function addReview(int $idUser, int $idPlat, string $commentaire, int $note):array{
         //Dabord je verifie l'authentification
         if (empty($idUser)){
             return[
@@ -36,8 +36,16 @@ class ReviewService{
             ];
         }
 
+        //verification que la note est comprise entre 1 et 5
+        if ($note <1 || $note > 5){
+            return [
+                'success' => false,
+                'message' => 'La note doit étre comprise entre 1 et 5'
+            ];
+        }
+
         // je peut enfin insere l'avis
-        $this->reviewRepository->insertReview($idUser,$idPlat, $commentaire);
+        $this->reviewRepository->insertReview($idUser,$idPlat, $commentaire,$note);
         return ['success' => true];
     }
 }

@@ -1,5 +1,4 @@
-CREATE DATABASE IF NOT EXISTS ViteGourmand;
-USE ViteGourmand;
+
 
 /*Table des Roles Admin, Employé et Client */
 CREATE TABLE Role(

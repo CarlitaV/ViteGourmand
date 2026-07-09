@@ -9,7 +9,7 @@
 <body>
     <?php require_once __DIR__ . '/includes/header.php'; ?> 
 
-    <h1>Gestion des Commandes (Admin) </h1>
+    <h2>Gestion des Commandes (Admin) </h2>
 
     <table class="adminTable">
         <thead>

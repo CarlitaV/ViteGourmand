@@ -13,10 +13,12 @@
         <div class="imgAccueil">
             <img  src="/asset/images/Plat_Gemini_Image1.png" alt="image d'acueil Vite & Gourmand">
         </div>
-        <form class="formRecherche" action="/menu" method="GET">
-            <input type="text" name="q" placeholder="Recherche un plat">
-            <button type="submit">Recherche</button>
-        </form>
+        <p class="paragraphe">
+        Découvrez une cuisine généreuse préparée avec des produits de qualité. <br>
+        Vite & Gourmand vous accompagne pour vos repas en famille, <br>
+        entre amis ou lors de vos événements grâce à un service de commande simple, <br>
+        rapide et sécurisé.
+        </p>
 
     </section>
     <section class="cards">

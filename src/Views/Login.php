@@ -7,12 +7,14 @@
     <title>Connexion</title>
 </head>
 <body>
-    <section class="formContact">
-        <h2>Connexion</h2>
+    <section class="formLogin">
+
         <form class="format" action="/connexion" method="post">
+            <h2>Connexion</h2>
             <div class="logo">
-                <img src="/../asset/images/Logo_Vite_Goumourmand_Gemini_Generated_Image.png" alt="">
+                <img src="/../asset/images/Logo_Vite_Goumourmand_Gemini_Generated_Image.png" alt="Logo vite & Gourmand">
             </div>
+            <br>
             <div>
                 <label for="">Email :</label>
                 <input type="email" name="email" required>

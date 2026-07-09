@@ -6,7 +6,7 @@
     <a href="#horaires">Horaire et jour d'ouverture</a>
     <br>
     <h3>NOUS SUIVRE</h3>
-    <div>
+    <div class="reseau">
         <img class="iconMedia" src="/asset/images/facebookicone.png" alt="Facebook">
         <img class="iconMedia" src="/asset/images/instagramicone.png" alt="Instagram">
         <img class="iconMedia" src="/asset/images/twittericone.png" alt="X">

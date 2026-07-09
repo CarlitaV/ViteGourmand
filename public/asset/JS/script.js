@@ -9,7 +9,7 @@
 document.addEventListener("DOMContentLoaded", function(){
 
     initSearch(); //recherche
-    initAvis();  // avis
+    //initAvis();  // avis
     initAdminCommande(); //admin
     initEmployeCommande(); //employé
     loadAllPlats(); // affiche tous les plats au chargement
@@ -102,36 +102,10 @@ function initSearch(){
 
 /*==========================ENVOI AVIS UTILISATEUR=================== */
 
-function initAvis(){
-    const form = document.querySelector("#formAvis");
-
-    //Si le formulaire existe pas arete de la page
-    if(!form)return;
-
-    form.addEventListener("submit", async function (e) {
-
-        //Empeche le rechargement de la page
-        e.preventDefault();
-
-        //Recuperation des données du formulaire
-        const formData = new FormData(form);
-
-        try{
-            //Envoi des données au serveur
-            const response = await fetch("/review",{
-                method:"POST",
-                body:formData
-            });
-
-            const data = await response.json();
-            alert("Avis envoyé avec succès");
-
-            form.reset();
-        }catch(error){
-            console.error("Erreur avis:", error);
-        }
-    });
-}
+/*function initAvis(){
+    return;
+        
+}*/
 
 /*=====================VALIDATION COMMANDE ADMIN========================*/
 

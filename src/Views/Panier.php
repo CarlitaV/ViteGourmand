@@ -9,76 +9,82 @@
 <body>  
 <?php require_once __DIR__ .'/includes/header.php'?>
 
-<h2>Mon panier</h2>
+<section class="panier">
+    <h2>Mon panier</h2>
 
-<?php /** @var array $plats */ ?>
-<?php /*initialisation des variables*/
-    $totalPanier = 0; 
-    $tva = 0; 
-    $totalTtc = 0;
-    $fraisLivraison = 10;
-    ?>
-<?php foreach($plats as $plat): ?>
+    <div class="contenairePanier">
 
-    <?php 
-    $totalLigne = $plat['prix'] * $plat['quantite'];
-    $totalPanier += $totalLigne;
-    $tva = $totalPanier * 0.20;
-    $totalTtc = $totalPanier + $tva;
-    ?>
+        <?php /** @var array $plats */ ?>
+        <?php /*initialisation des variables*/
+            $totalPanier = 0; 
+            $tva = 0; 
+            $totalTtc = 0;
+            $fraisLivraison = 10;
+            ?>
+        <?php foreach($plats as $plat): ?>
 
-    <div class="card">
+            <?php 
+            $totalLigne = $plat['prix'] * $plat['quantite'];
+            $totalPanier += $totalLigne;
+            $tva = $totalPanier * 0.20;
+            $totalTtc = $totalPanier + $tva;
+            ?>
 
-        <h3><?= htmlspecialchars($plat['titre']) ?></h3>
-        <p><?= htmlspecialchars($plat['description']); ?></p>
-        <p>Quantité : 
-            <?= $plat['quantite'] ?></p>
-        <p>Prix unitaire: 
-            <?= $plat['prix'] ?> €</p>
-        <p>Total HT : <?= $totalPanier ?></p>
-        <p>TVA (20%) : <?= $totalPanier * .20 ?> € </p>
-        <p>Frais de livraison : <?=  $fraisLivraison ?></p>
-        <p>Total TTC : <?= $totalTtc ?> € </p>
+            <div class="card">
 
-        <form method="POST" action="/panier/delete">
-            <input type="hidden"
-            name="idPlat"
-            value="<?= $plat['idPlat']; ?>">
+                <h3><?= htmlspecialchars($plat['titre']) ?></h3>
+                <p><?= htmlspecialchars($plat['description']); ?></p>
+                <p>Quantité : 
+                    <?= $plat['quantite'] ?></p>
+                <p>Prix unitaire: 
+                    <?= $plat['prix'] ?> €</p>
+                <p>Total HT : <?= $totalPanier ?></p>
+                <p>TVA (20%) : <?= $totalPanier * .20 ?> € </p>
+                <p>Frais de livraison : <?=  $fraisLivraison ?></p>
+                <p>Total TTC : <?= $totalTtc ?> € </p>
 
-            <button type="submit">Suprimer</button>
-        </form>
+                <form method="POST" action="/panier/delete">
+                    <input type="hidden"
+                    name="idPlat"
+                    value="<?= $plat['idPlat']; ?>">
+
+                    <button type="submit">Suprimer</button>
+                </form>
+            </div>
+        <?php endforeach; ?>
     </div>
-<?php endforeach; ?>
+    
+    <h3>Total panier : <?= $totalTtc; ?> € </h3>
+    
+    <form method="POST" action="/order">
 
-<h3>Total panier : <?= $totalTtc; ?> € </h3>
-<form method="POST" action="/order">
+        <label>Adresse de livraison :</label>
+        <input type="text" name="adresse" required>
 
-    <label>Adresse de livraison :</label>
-    <input type="text" name="adresse" required>
+        <br><br>
 
-    <br><br>
+        <label>Nombre de personnes :</label>
+        <input type="number" name="nbPersonnes" min="1" required>
 
-    <label>Nombre de personnes :</label>
-    <input type="number" name="nbPersonnes" min="1" required>
+        <br><br>
 
-    <br><br>
+        <label>Mode de paiement :</label>
+        <select name="modePaiement">
+            <option value="cb">Carte bancaire</option>
+            <option value="paypal">Paypal</option>
+        </select>
 
-    <label>Mode de paiement :</label>
-    <select name="modePaiement">
-        <option value="cb">Carte bancaire</option>
-        <option value="paypal">Paypal</option>
-    </select>
+        <br><br>
 
-    <br><br>
+        <!-- temporaire -->
+        <input type="hidden" name="idPlat" value="<?= $plats[0]['idPlat'] ?? '' ?>">
 
-    <!-- temporaire -->
-    <input type="hidden" name="idPlat" value="<?= $plats[0]['idPlat'] ?? '' ?>">
+        <button type="submit">
+            Commander
+        </button>
 
-    <button type="submit">
-        Commander
-    </button>
-
-</form>
+    </form>
+</section>
 
 <?php require_once __DIR__ .'/includes/footer.php'?>
 

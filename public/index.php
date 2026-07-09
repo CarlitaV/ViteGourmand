@@ -1,7 +1,7 @@
 <?php
 
 //Inclure l'autoloader (fichier generer pas composer)
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 //Import des classe
 use App\Config\Config;
@@ -18,12 +18,12 @@ use App\Controllers\HomeController;
 Config::load();
 //Affiche les erreurs directement dans la page
 //Si APP_ENV n'existe pas on considère que c'est prod
-if(($_ENV['APP_ENV'] ?? 'prod') === 'dev'){
+/*if(($_ENV['APP_ENV'] ?? 'prod') === 'dev'){*/
     ini_set('display_errors',1);
     error_reporting(E_ALL);
-}else{
+/*}else{
     ini_set('display_errors',0);
-}
+}*/
 //Demarrer une session ou reprend la sesssion existante
 session_start();
 

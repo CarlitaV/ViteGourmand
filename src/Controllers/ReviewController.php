@@ -19,9 +19,10 @@ class ReviewController{
         $idUser = $_SESSION['idUser'] ?? null; //l'utilisateur est deja co donc recuperation via session 
         $idplat = $_POST['idPlat'];
         $commentaire = $_POST['commentaire'];
+        $note = (int) $_POST['note'];
 
         //
-        $result = $this->reviewService->addReview($idUser, $idplat, $commentaire); 
+        $result = $this->reviewService->addReview($idUser, $idplat, $commentaire, $note); 
 
         //Affichage de la vue
         if($result['success']){

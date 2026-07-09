@@ -9,12 +9,14 @@
 <body>
     <search>
         <form method="GET" action="/search">
+            <h3>Rechercher un plat</h3>
             <input type="text" id="searchInput" name="keyword" placeholder="Recherche un plat">
             <button type="submit">Rechercher</button>
             <div id="resultats"></div>
         </form>
 
         <div class="plat_list">
+            <?php /** @var array $plats */ ?>
             <?php foreach($plats as $plat): ?>
                 <div class="card">
                     <h3><?= $plat['titre'] ?></h3>

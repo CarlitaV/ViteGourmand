@@ -23,23 +23,32 @@ class Database{
         if(self::$instance === null){
 
             // On construit le DSN (Data Source Name) avec les infos du fichier .env
-            $dsn = sprintf("mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4", 
+            /*$dsn = sprintf("mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4", 
             Config::get('DB_HOST'), 
             Config::get('DB_PORT', '3306'), 
-            Config::get('DB_NAME'));
+            Config::get('DB_NAME'));*/
 
             $options = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, //lance des exceptions en cas d'erreur SQL
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC //Récupère les résultats sous forme de tableau associatif
             ];
 
+            $dsn = "mysql:host=sql205.infinityfree.com;dbname=if0_42327667_vitegourmand;charset=utf8mb4";
+
             try{
 
                 //On crée l'instance de PDO et on la stock
-                self::$instance = new PDO($dsn, 
+                /*self::$instance = new PDO($dsn, 
                 Config::get('DB_USER'), 
                 Config::get('DB_PASSWORD'), 
-                $options);
+                $options);*/
+                //Changement pour le deploiement avec infinity + FileZilla
+                self::$instance = new PDO(
+                $dsn, 
+                "if0_42327667",
+                "88QtYVqZRf",
+                $options
+            );
                 
             }catch(PDOException $e){
                 die("Erreur de connexion à la base de données : ". $e->getMessage());
